@@ -13,3 +13,6 @@ migrate:
 
 downgrade:
 	cd src; alembic downgrade -1
+
+db:
+	docker compose --env-file .env -p wooppay-test -f devops/docker-compose.yaml up db --build --detach
