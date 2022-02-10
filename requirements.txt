@@ -11,3 +11,4 @@ loguru
 flask
 flask-admin
 Flask-WTF
+WTForms
