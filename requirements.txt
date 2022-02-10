@@ -4,3 +4,5 @@ notebook
 sqlalchemy
 sqlalchemy-utils
 alembic
+pydantic
+pydantic[dotenv]
