@@ -19,3 +19,6 @@ db:
 
 app-dev:
 	cd src; python -m app
+
+admin-dev:
+	cd src; python -m admin
