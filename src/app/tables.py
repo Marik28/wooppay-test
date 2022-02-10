@@ -69,8 +69,8 @@ class Person(Base):
         back_populates="director",
     )
 
-    def __str__(self):
-        return str(self.fullname)
+    def __str__(self) -> str:
+        return self.fullname
 
 
 class Country(Base):
@@ -79,8 +79,8 @@ class Country(Base):
     id = Column(Integer(), primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False, unique=True)
 
-    def __str__(self):
-        return str(self.name)
+    def __str__(self) -> str:
+        return self.name
 
 
 class Genre(Base):
@@ -89,7 +89,7 @@ class Genre(Base):
     id = Column(Integer(), primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False, unique=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -98,6 +98,9 @@ class Rating(Base):
 
     id = Column(Integer(), primary_key=True, autoincrement=True)
     code = Column(String(20), nullable=False, unique=True)
+
+    def __str__(self) -> str:
+        return self.code
 
 
 class Show(Base):
@@ -140,5 +143,5 @@ class Show(Base):
         CheckConstraint("duration >= 0", name="positive_duration_constraint")
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.title} ({self.release_year})"
