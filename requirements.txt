@@ -12,3 +12,4 @@ flask
 flask-admin
 Flask-WTF
 WTForms
+typer
