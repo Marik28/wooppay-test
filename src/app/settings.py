@@ -8,11 +8,11 @@ base_dir: Path = Path(__file__).parent.parent
 class Settings(BaseSettings):
     base_dir: Path = base_dir
 
-    postgres_host: str = "localhost"
-    postgres_port: int = 5432
-    postgres_user: str = "postgres"
-    postgres_password: str = "postgres"
-    postgres_db: str = "wooppay_test"
+    postgres_host: str
+    postgres_port: int
+    postgres_user: str
+    postgres_password: str
+    postgres_db: str
     db_url: str = None
 
 
