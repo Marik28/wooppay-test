@@ -11,5 +11,7 @@ def create_app(session: sqlalchemy.orm.Session) -> Flask:
     admin = Admin(app, template_mode="bootstrap4")
     from .views.shows import ShowsView
     admin.add_view(ShowsView(tables.Show, session))
+    from .views.persons import PersonsView
+    admin.add_view(PersonsView(tables.Person, session))
 
     return app
