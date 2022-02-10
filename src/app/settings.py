@@ -19,6 +19,12 @@ class Settings(BaseSettings):
     app_host: str
     app_port: int
 
+    username_min_len: int
+    username_max_len: int
+
+    password_min_len: int
+    password_max_len: int
+
 
 settings = Settings(_env_file=base_dir / ".env")
 
