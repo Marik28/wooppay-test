@@ -8,3 +8,6 @@ alembic
 pydantic
 pydantic[dotenv]
 loguru
+flask
+flask-admin
+Flask-WTF
