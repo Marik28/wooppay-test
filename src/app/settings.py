@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     postgres_db: str
     db_url: str = None
 
+    debug: bool
+    app_host: str
+    app_port: int
+
 
 settings = Settings(_env_file=base_dir / ".env")
 
