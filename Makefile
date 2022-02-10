@@ -16,3 +16,6 @@ downgrade:
 
 db:
 	docker compose --env-file .env -p wooppay-test -f devops/docker-compose.yaml up db --build --detach
+
+app-dev:
+	cd src; python -m app
