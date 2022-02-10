@@ -6,3 +6,4 @@ sqlalchemy-utils
 alembic
 pydantic
 pydantic[dotenv]
+loguru
