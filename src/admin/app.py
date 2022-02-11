@@ -3,10 +3,12 @@ from flask import Flask
 from flask_admin import Admin
 
 from app import tables
+from app.settings import settings
 
 
 def create_app(session: sqlalchemy.orm.Session) -> Flask:
     app = Flask(__name__)
+    app.config["SECRET_KEY"] = settings.secret_key
 
     admin = Admin(app, template_mode="bootstrap4")
     from .views.shows import ShowsView
