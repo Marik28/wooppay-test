@@ -14,13 +14,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
 from .models.shows import ShowType
+from .utils.enums import get_enum_values
 
 Base = declarative_base()
-
-
-def get_enum_values(enum) -> list[str]:
-    return [str(e.value) for e in enum]
-
 
 actors_shows_association_table = Table(
     "actors_shows_association",
