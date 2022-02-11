@@ -18,7 +18,7 @@ Persons
             {% if persons %}
                 {% for person in persons %}
                 <p class="my-1">
-                    <a href="#">{{ person.fullname }}</a>
+                    <a href="{{ url_for('persons.get_person', person_id=person.id) }}">{{ person.fullname }}</a>
                 </p>
                 {% endfor %}
             {% else %}
