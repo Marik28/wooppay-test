@@ -4,4 +4,5 @@ from ..services.generic import GenericCRUDService
 
 class ShowsService(GenericCRUDService):
     model = tables.Show
-    order_by = tables.Show.title
+    lookup_field = "show_id"
+    order_by = tables.Show.title.asc()
