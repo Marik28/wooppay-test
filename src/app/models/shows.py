@@ -1,6 +1,6 @@
 import enum
 
 
-class MovieType(enum.Enum):
+class ShowType(enum.Enum):
     TV_SHOW = "TV Show"
     MOVIE = "Movie"

@@ -13,7 +13,7 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-from .models.shows import MovieType
+from .models.shows import ShowType
 
 Base = declarative_base()
 
@@ -108,7 +108,7 @@ class Show(Base):
 
     show_id = Column(String(8), primary_key=True)
     type = Column(
-        Enum(MovieType, create_constraint=True, values_callable=get_enum_values),
+        Enum(ShowType, create_constraint=True, values_callable=get_enum_values),
         nullable=False,
     )
     title = Column(String(255), nullable=False)
