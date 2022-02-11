@@ -15,7 +15,7 @@
 <header class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Home</a>
     <a href="#" class="nav-link text-light">Shows</a>
-    <a href="#" class="nav-link text-light">Persons</a>
+    <a href="{{ url_for('persons.get_persons') }}" class="nav-link text-light">Persons</a>
     <a
             href="https://github.com/Marik28/wooppay-test"
             target="_blank"
