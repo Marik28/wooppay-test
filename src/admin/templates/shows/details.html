@@ -1,0 +1,20 @@
+{% extends 'admin/model/details.html' %}
+
+{% block title %}
+    {{ model.title }}
+{% endblock %}
+
+{% macro render_persons(model, column) %}
+    {% set persons = model[column] %}
+    {% if persons %}
+        {% for person in persons %}
+            <p class="my-0">
+                <a href="{{ get_url('person.details_view', id=person.id) }}">
+                    {{ person.fullname }}
+                </a>
+            </p>
+        {% endfor %}
+    {% else %}
+        <p class="my-0">-</p>
+    {% endif %}
+{% endmacro %}
