@@ -16,11 +16,17 @@ Persons
                 <i>Search results ({{ page.total }} results) </i>
             </p>
             {% if persons %}
+            <div class="list-group">
+
                 {% for person in persons %}
-                <p class="my-1">
-                    <a href="{{ url_for('persons.get_person', person_id=person.id) }}">{{ person.fullname }}</a>
-                </p>
+                <div class="my-1 w-50">
+                    <a class="list-group-item list-group-item-action"
+                       href="{{ url_for('persons.get_person', person_id=person.id) }}">
+                        {{ person.fullname }}
+                    </a>
+                </div>
                 {% endfor %}
+            </div>
             {% else %}
             <p>Nothing was found :(</p>
             {% endif %}
