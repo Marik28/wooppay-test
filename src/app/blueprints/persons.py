@@ -1,23 +1,33 @@
 from flask import (
     Blueprint,
-    render_template,
+    render_template, request,
 )
 
+from ..app import csrf
 from ..database import Session
+from ..forms.persons import PersonsSearchForm
 from ..services.persons import PersonsService
 
 blueprint = Blueprint('persons', __name__, template_folder='templates')
 
 
 @blueprint.get("/")
+@csrf.exempt
 def get_persons():
-    with Session() as session:
-        service = PersonsService(session)
-        page = service.get_page(1, 10)
+    form = PersonsSearchForm(request.args)
+    if form.validate():
+        with Session() as session:
+            service = PersonsService(session)
+            page = service.get_page(form.page.data, form.per_page.data, search=form.search.data)
+            persons = page.items
+    else:
+        persons = []
+        page = None
     return render_template(
         "persons/list.html",
         page=page,
-        persons=page.items,
+        persons=persons,
+        form=form,
     )
 
 
