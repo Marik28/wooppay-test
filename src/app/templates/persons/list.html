@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Persons
+{% endblock %}
+
+{% block content %}
+<div class="mx-5">
+    <div class="row">
+        <div class="col-4">
+            <h1>Filter</h1>
+        </div>
+        <div class="col-8">
+            <h1 class="text-center">Persons</h1>
+            <p class="text-center">
+                <i>Search results ({{ page.total }} results) </i>
+            </p>
+            {% if persons %}
+                {% for person in persons %}
+                <p class="my-1">
+                    <a href="#">{{ person.fullname }}</a>
+                </p>
+                {% endfor %}
+            {% else %}
+            <p>Nothing was found :(</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
