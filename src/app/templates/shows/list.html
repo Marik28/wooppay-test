@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Shows
+{% endblock %}
+
+{% block content %}
+<div class="mx-5">
+    <div class="row">
+        <div class="col-4">
+            <h1 class="text-center">Filter</h1>
+            <p class="bg-secondary text-light">
+                Duration is interpreted as minutes for movies and as seasons for TV shows
+            </p>
+        </div>
+        <div class="col-8">
+            <h1 class="text-center">Shows</h1>
+            <p class="text-center"><i>{{ page.total }} results</i></p>
+            {% if not shows %}
+            <p>Nothing found :(</p>
+            {% else %}
+            {% for show in shows %}
+            <div class="card my-2">
+                <div class="card-header">
+                    <h3><a href="{{ show.show_id }}">{{ show.title }} ({{ show.release_year }})</a></h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        {{ show.type.value }} {% if show.country %}
+                        ({% for country in show.country %}
+                        {{ country.name }}{% if not loop.last %}{{ ', ' }}{% endif %}
+                        {% endfor %})
+                        {% endif %} </p>
+
+                    <p>
+                        Duration: {{ show.duration }}
+                        {% if show.type.value == "Movie" %}
+                        minutes
+                        {% else %}
+                        season(s)
+                        {% endif %}
+                    </p>
+                    <p>
+                        Rating: {{ show.rating.code }}
+                    </p>
+
+                    {% if show.listed_in %}
+                    <p>Genres:
+                        {% for genre in show.listed_in %}
+                        {{ genre.name }}{% if not loop.last %}{{ ', ' }}{% endif %}
+                        {% endfor %}</p>
+                    {% endif %}
+
+                    {% if show.director %}
+                    <p>Directors:
+                        {% for director in show.director %}
+                            <a href="{{ url_for('persons.get_person', person_id=director.id) }}">
+                                {{ director.fullname }}
+                            </a>
+                        {% if not loop.last %}{{ ', ' }}{% endif %}
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+
+                    {% if show.cast %}
+                    <p>Cast:
+                        {% for actor in show.cast %}
+                            <a href="{{ url_for('persons.get_person', person_id=actor.id) }}">
+                                {{ actor.fullname }}
+                            </a>
+                        {% if not loop.last %}{{ ', ' }}{% endif %}
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
