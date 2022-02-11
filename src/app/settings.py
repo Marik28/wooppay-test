@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     debug: bool
     app_host: str
     app_port: int
+    secret_key: str
 
     admin_app_host: str
     admin_app_port: int
