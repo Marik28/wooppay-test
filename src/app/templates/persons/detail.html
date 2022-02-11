@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ person.fullname }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">{{ person.fullname }}</h1>
+{#
+    {% if person.starred_in %}
+    <h5>Starred in:</h5>
+    {% for show in person.starred_in %}
+    <p>
+        <a href="#">{{ show.title }}</a>
+    </p>
+    {% endfor %}
+    {% endif %}
+
+        {% if person.directed %}
+    <h5>Directed:</h5>
+    {% for show in person.directed %}
+    <p>
+        <a href="#">{{ show.title }}</a>
+    </p>
+    {% endfor %}
+    {% endif %}
+    #}
+</div>
+{% endblock %}
