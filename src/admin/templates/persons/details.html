@@ -1,0 +1,21 @@
+{% extends 'admin/model/details.html' %}
+
+
+{% macro render_shows(model, column) %}
+    {% set shows = model[column] %}
+    {% if shows %}
+        {% for show in shows %}
+            <p class="my-0">
+                <a href="{{ get_url('show.details_view', id=show.show_id) }}">
+                    {{ show.title }} ({{ show.release_year }})
+                </a>
+            </p>
+        {% endfor %}
+    {% else %}
+        <p class="my-0">-</p>
+    {% endif %}
+{% endmacro %}
+
+{% block title %}
+    {{ model.fullname }}
+{% endblock %}
