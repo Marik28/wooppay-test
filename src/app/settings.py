@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     app_host: str
     app_port: int
 
+    admin_app_host: str
+    admin_app_port: int
+
     username_min_len: int
     username_max_len: int
 
