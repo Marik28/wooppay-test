@@ -62,6 +62,7 @@ class GenericCRUDService:
         return self.get_default_query()
 
     def get_default_query(self) -> Query:
+        """Override this method to change query used in `get_list_query` and `get_detail_query`"""
         model = self._get_model()
         order_by = self._get_order_by()
         query = self.session.query(model).order_by(order_by)
