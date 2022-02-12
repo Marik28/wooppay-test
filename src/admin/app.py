@@ -21,5 +21,7 @@ def create_app(session: sqlalchemy.orm.Session) -> Flask:
     admin.add_view(CountriesView(tables.Country, session))
     from .views.ratings import RatingsView
     admin.add_view(RatingsView(tables.Rating, session))
+    from .views.users import UsersView
+    admin.add_view(UsersView(tables.User, session))
 
     return app
