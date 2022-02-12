@@ -3,6 +3,7 @@ from flask import (
     render_template,
     request,
 )
+from werkzeug.datastructures import MultiDict
 
 from ..database import Session
 from ..forms.shows import ShowsSearchForm
@@ -19,6 +20,8 @@ blueprint = Blueprint('shows', __name__, template_folder='templates')
 
 @blueprint.get("/")
 def get_shows():
+    query = MultiDict(request.args)
+    query.pop("page", None)
     with Session() as session:
         form = ShowsSearchForm(request.args, active=True)
         available_ratings = RatingsService(session).get_list()
@@ -28,8 +31,7 @@ def get_shows():
         available_genres = GenresService(session).get_list()
         form.genres.choices = to_list_of_strings(available_genres, "name")
         if form.validate():
-            shows_service = ShowsService(session)
-            page = shows_service.get_page(**form.data)
+            page = ShowsService(session).get_page(**form.data)
             shows = page.items
         else:
             page = None
@@ -38,6 +40,7 @@ def get_shows():
         "shows": shows,
         "page": page,
         "form": form,
+        "query": query,
     }
     return render_template("shows/list.html", **context)
 

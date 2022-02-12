@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import render_field, render_show_card %}
+{% from 'macros.html' import render_field, render_show_card, render_pagination %}
 
 {% block title %}
 Shows
@@ -99,6 +99,11 @@ Shows
             <!-- Show cards-->
 
             {% endif %}
+
+            <!-- Pagination -->
+            {{ render_pagination(page, view_name='shows.get_shows', search_query=query) }}
+            <!-- Pagination -->
+
         </div>
         <!--   Shows display section end     -->
 
