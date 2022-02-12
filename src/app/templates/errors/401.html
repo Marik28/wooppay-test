@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Not Authorized
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Not Authorized</h1>
+
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+
+    <a href="{{ url_for('auth.get_login_page') }}">Login page</a>
+</div>
+{% endblock %}
