@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import render_field %}
+{% from 'macros.html' import render_field, render_show_card %}
 
 {% block title %}
 Shows
@@ -94,65 +94,7 @@ Shows
             <!-- Show cards-->
             {% else %}
             {% for show in shows %}
-            <div class="card my-2">
-                <div class="card-header">
-                    <h3><a href="{{ show.show_id }}">{{ show.title }} ({{ show.release_year }})</a></h3>
-                </div>
-                <div class="card-body">
-                    <p class="card-text my-1">
-                        {{ show.type.value }} {% if show.country %}
-                        ({% for country in show.country %}
-                        {{ country.name }}{% if not loop.last %}{{ ', ' }}{% endif %}
-                        {% endfor %})
-                        {% endif %}
-                    </p>
-
-                    <p class="card-text my-1">
-                        Duration: {{ show.duration }}
-                        {% if show.type.value == "Movie" %}
-                        minutes
-                        {% else %}
-                        season(s)
-                        {% endif %}
-                    </p>
-                    <p class="card-text my-1">
-                        Rating: {{ show.rating.code }}
-                    </p>
-
-                    {% if show.listed_in %}
-                    <p class="card-text my-1">
-                        Genres:
-                        {% for genre in show.listed_in %}
-                        {{ genre.name }}{% if not loop.last %}{{ ', ' }}{% endif %}
-                        {% endfor %}
-                    </p>
-                    {% endif %}
-
-                    {% if show.director %}
-                    <p class="card-text my-1">
-                        Directors:
-                        {% for director in show.director %}
-                        <a href="{{ url_for('persons.get_person', person_id=director.id) }}">
-                            {{ director.fullname }}
-                        </a>
-                        {% if not loop.last %}{{ ', ' }}{% endif %}
-                        {% endfor %}
-                    </p>
-                    {% endif %}
-
-                    {% if show.cast %}
-                    <p class="card-text my-1">
-                        Cast:
-                        {% for actor in show.cast %}
-                        <a href="{{ url_for('persons.get_person', person_id=actor.id) }}">
-                            {{ actor.fullname }}
-                        </a>
-                        {% if not loop.last %}{{ ', ' }}{% endif %}
-                        {% endfor %}
-                    </p>
-                    {% endif %}
-                </div>
-            </div>
+                {{ render_show_card(show) }}
             {% endfor %}
             <!-- Show cards-->
 
