@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'macros.html' import render_field %}
 
 {% block title %}
 Shows
@@ -7,17 +8,90 @@ Shows
 {% block content %}
 <div class="mx-5">
     <div class="row">
+        <!-- Filters section -->
         <div class="col-4">
             <h1 class="text-center">Filter</h1>
-            <p class="bg-secondary text-light">
-                Duration is interpreted as minutes for movies and as seasons for TV shows
-            </p>
+
+            <!-- Filters form -->
+            <form method="get" action="{{ url_for('shows.get_shows') }}">
+                <!-- Search -->
+                <div class="my-2">
+                    {{ render_field(form.search, placeholder="Search by title or description") }}
+                </div>
+                <!-- Search -->
+
+                <!-- Release year -->
+                <div class="my-2">
+                    {{ render_field(form.release_year, with_errors=True) }}
+                </div>
+                <!-- Release year -->
+
+                <!-- Duration -->
+                <h6>Duration</h6>
+                <p class="text-secondary">
+                    Duration is interpreted as minutes for movies and as seasons for TV shows
+                </p>
+                <div class="border">
+                    <div class="m-2">
+                        <div class="form-group my-2">
+                            {{ render_field(form.duration_min, with_errors=True, placeholder="Enter value...") }}
+                        </div>
+                        <div class="form-group my-2">
+                            {{ render_field(form.duration_max, with_errors=True, placeholder="Enter value...") }}
+                        </div>
+                    </div>
+                </div>
+                <!-- Duration -->
+
+                <!-- Per page -->
+
+                <div class="form-group my-2">
+                    {{ render_field(form.per_page, with_errors=True) }}
+                </div>
+                <!-- Per page -->
+
+                <!-- Radios and checkboxes -->
+                <div class="row">
+                    <div class="col-6">
+                        <div>
+                            {{ render_field(form.countries) }}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            {{ render_field(form.show_type) }}
+                        </div>
+                        <div>
+                            {{ render_field(form.rating) }}
+                        </div>
+                        <div>
+                            {{ render_field(form.genres) }}
+                        </div>
+                    </div>
+                </div>
+                <!-- Radios and checkboxes -->
+
+                <!-- Submit -->
+                <input class="btn btn-primary" type="submit" value="Filter">
+                <!-- Submit -->
+
+            </form>
+            <!--  Filters form end  -->
+
         </div>
+        <!--    Filters section end    -->
+
+        <!--   Shows display section     -->
         <div class="col-8">
             <h1 class="text-center">Shows</h1>
+
+            <!-- Results message -->
             <p class="text-center"><i>{{ page.total }} results</i></p>
             {% if not shows %}
             <p>Nothing found :(</p>
+            <!-- Results message -->
+
+            <!-- Show cards-->
             {% else %}
             {% for show in shows %}
             <div class="card my-2">
@@ -25,14 +99,15 @@ Shows
                     <h3><a href="{{ show.show_id }}">{{ show.title }} ({{ show.release_year }})</a></h3>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">
+                    <p class="card-text my-1">
                         {{ show.type.value }} {% if show.country %}
                         ({% for country in show.country %}
                         {{ country.name }}{% if not loop.last %}{{ ', ' }}{% endif %}
                         {% endfor %})
-                        {% endif %} </p>
+                        {% endif %}
+                    </p>
 
-                    <p>
+                    <p class="card-text my-1">
                         Duration: {{ show.duration }}
                         {% if show.type.value == "Movie" %}
                         minutes
@@ -40,34 +115,38 @@ Shows
                         season(s)
                         {% endif %}
                     </p>
-                    <p>
+                    <p class="card-text my-1">
                         Rating: {{ show.rating.code }}
                     </p>
 
                     {% if show.listed_in %}
-                    <p>Genres:
+                    <p class="card-text my-1">
+                        Genres:
                         {% for genre in show.listed_in %}
                         {{ genre.name }}{% if not loop.last %}{{ ', ' }}{% endif %}
-                        {% endfor %}</p>
+                        {% endfor %}
+                    </p>
                     {% endif %}
 
                     {% if show.director %}
-                    <p>Directors:
+                    <p class="card-text my-1">
+                        Directors:
                         {% for director in show.director %}
-                            <a href="{{ url_for('persons.get_person', person_id=director.id) }}">
-                                {{ director.fullname }}
-                            </a>
+                        <a href="{{ url_for('persons.get_person', person_id=director.id) }}">
+                            {{ director.fullname }}
+                        </a>
                         {% if not loop.last %}{{ ', ' }}{% endif %}
                         {% endfor %}
                     </p>
                     {% endif %}
 
                     {% if show.cast %}
-                    <p>Cast:
+                    <p class="card-text my-1">
+                        Cast:
                         {% for actor in show.cast %}
-                            <a href="{{ url_for('persons.get_person', person_id=actor.id) }}">
-                                {{ actor.fullname }}
-                            </a>
+                        <a href="{{ url_for('persons.get_person', person_id=actor.id) }}">
+                            {{ actor.fullname }}
+                        </a>
                         {% if not loop.last %}{{ ', ' }}{% endif %}
                         {% endfor %}
                     </p>
@@ -75,8 +154,12 @@ Shows
                 </div>
             </div>
             {% endfor %}
+            <!-- Show cards-->
+
             {% endif %}
         </div>
+        <!--   Shows display section end     -->
+
     </div>
 </div>
 {% endblock %}
