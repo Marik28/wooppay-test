@@ -9,6 +9,8 @@ pydantic
 pydantic[dotenv]
 loguru
 flask
+flask_login
+Flask-Bcrypt
 flask-admin
 Flask-WTF
 WTForms
