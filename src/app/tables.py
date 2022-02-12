@@ -1,3 +1,4 @@
+from flask_login import UserMixin
 from sqlalchemy import (
     Column,
     Integer,
@@ -9,6 +10,8 @@ from sqlalchemy import (
     CheckConstraint,
     Table,
     ForeignKey,
+    LargeBinary,
+    Boolean,
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -141,3 +144,15 @@ class Show(Base):
 
     def __str__(self) -> str:
         return f"{self.title} ({self.release_year})"
+
+
+class User(Base, UserMixin):
+    __tablename__ = "users"
+
+    id = Column(Integer(), primary_key=True, autoincrement=True)
+    username = Column(String(50), unique=True, nullable=False)
+    password_hash = Column(LargeBinary(255), nullable=False)
+    is_admin = Column(Boolean(), default=False, nullable=False)
+
+    def __str__(self):
+        return str(self.username)
