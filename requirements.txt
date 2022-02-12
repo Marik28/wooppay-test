@@ -15,3 +15,4 @@ flask-admin
 Flask-WTF
 WTForms
 typer
+pytest
