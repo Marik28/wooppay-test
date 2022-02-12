@@ -13,14 +13,16 @@ class ShowsService(GenericCRUDService):
     order_by = tables.Show.title.asc()
 
     def get_default_query(self) -> Query:
+        order_by = self._get_order_by()
+        model = self._get_model()
         return (
-            self.session.query(tables.Show).options(
-                joinedload(tables.Show.cast),
-                joinedload(tables.Show.director),
-                joinedload(tables.Show.country),
-                joinedload(tables.Show.listed_in),
-                joinedload(tables.Show.rating),
-            )
+            self.session.query(model)
+                .options(joinedload(tables.Show.cast),
+                         joinedload(tables.Show.director),
+                         joinedload(tables.Show.country),
+                         joinedload(tables.Show.listed_in),
+                         joinedload(tables.Show.rating))
+                .order_by(order_by)
         )
 
     def get_list_query(self,
