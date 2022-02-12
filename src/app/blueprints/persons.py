@@ -2,6 +2,7 @@ from flask import (
     Blueprint,
     render_template, request,
 )
+from werkzeug.datastructures import MultiDict
 
 from ..database import Session
 from ..forms.persons import PersonsSearchForm
@@ -13,6 +14,8 @@ blueprint = Blueprint('persons', __name__, template_folder='templates')
 # TODO: add reset filters button
 @blueprint.get("/")
 def get_persons():
+    query = MultiDict(request.args)
+    query.pop("page", None)
     form = PersonsSearchForm(request.args)
     if form.validate():
         with Session() as session:
@@ -27,6 +30,7 @@ def get_persons():
         page=page,
         persons=persons,
         form=form,
+        query=query,
     )
 
 

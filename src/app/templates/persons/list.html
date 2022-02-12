@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import render_field %}
+{% from 'macros.html' import render_field, render_pagination %}
 
 {% block title %}
 Persons
@@ -8,8 +8,9 @@ Persons
 {% block content %}
 <div class="mx-5">
     <div class="row">
+        <!-- Filters -->
         <div class="col-4">
-            <h1>Filter</h1>
+            <h1 class="text-center">Filter</h1>
             <form method="get">
                 <div class="form-group my-2">
                     {{ render_field(form.search, placeholder="Search by name") }}
@@ -20,10 +21,13 @@ Persons
                 <input type="submit" class="btn btn-primary" value="Search"/>
             </form>
         </div>
+        <!-- Filters -->
+
+        <!-- Search results -->
         <div class="col-8">
             <h1 class="text-center">Persons</h1>
             <p class="text-center">
-                <i>Search results ({{ page.total }} results) </i>
+                <i>{{ page.total }} results </i>
             </p>
             {% if persons %}
             <div class="list-group">
@@ -40,7 +44,13 @@ Persons
             {% else %}
             <p>Nothing was found :(</p>
             {% endif %}
+
+            <!-- Pagination -->
+            {{ render_pagination(page, view_name='persons.get_persons', search_query=query) }}
+            <!-- Pagination -->
         </div>
+        <!-- Search results -->
+
     </div>
 </div>
 {% endblock %}
