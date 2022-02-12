@@ -1,6 +1,6 @@
-{% macro render_field(field, class_="form-control", label_class="form-label", with_errors=False) %}
+{% macro render_field(field, class_="form-control", label_class="form-label", placeholder="", with_errors=False) %}
     {{ field.label(class_=label_class)|safe }}
-    {{ field(class_=class_)|safe }}
+    {{ field(class_=class_, placeholder=placeholder)|safe }}
     {% if with_errors %}
         <ul class="text-danger">
             {% for error in field.errors %}
