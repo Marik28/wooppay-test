@@ -23,15 +23,15 @@ class ShowsView(ModelView):
     list_template = "shows/list.html"
 
     # Columns
-    form_columns = ["show_id", "title", "type", "listed_in", "country", "duration", "date_added",
+    form_columns = ["show_id", "title", "description", "type", "listed_in", "country", "duration", "date_added",
                     "release_year", "director", "cast"]
     column_sortable_list = ["title", "release_year"]
-    column_details_list = ["show_id", "title", "type", "listed_in", "country", "duration", "date_added", "release_year",
-                           "director", "cast"]
-    column_export_list = ["show_id", "title", "type", "listed_in", "country", "duration", "date_added", "release_year",
-                          "director", "cast"]
+    column_details_list = ["show_id", "title", "description", "type", "listed_in", "country", "duration", "date_added",
+                           "release_year", "director", "cast"]
+    column_export_list = ["show_id", "title", "description", "type", "listed_in", "country", "duration", "date_added",
+                          "release_year", "director", "cast"]
     column_list = ["title", "type", "rating", "release_year", "duration"]
-    column_searchable_list = ["show_id", "title", "rating.code", "release_year"]
+    column_searchable_list = ["show_id", "title", "description", "rating.code", "release_year"]
 
     # Formatters
     column_formatters = {
