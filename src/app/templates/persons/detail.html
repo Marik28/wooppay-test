@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% from 'macros.html' import render_person_shows %}
+
 {% block title %}
 {{ person.fullname }}
 {% endblock %}
@@ -7,24 +9,14 @@
 {% block content %}
 <div class="container">
     <h1 class="text-center">{{ person.fullname }}</h1>
-{#
     {% if person.starred_in %}
-    <h5>Starred in:</h5>
-    {% for show in person.starred_in %}
-    <p>
-        <a href="#">{{ show.title }}</a>
-    </p>
-    {% endfor %}
+        <h5>Starred in:</h5>
+        {{ render_person_shows(person.starred_in) }}
     {% endif %}
 
-        {% if person.directed %}
-    <h5>Directed:</h5>
-    {% for show in person.directed %}
-    <p>
-        <a href="#">{{ show.title }}</a>
-    </p>
-    {% endfor %}
+    {% if person.directed %}
+        <h5>Directed:</h5>
+        {{ render_person_shows(person.directed) }}
     {% endif %}
-    #}
 </div>
 {% endblock %}
