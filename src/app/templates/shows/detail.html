@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ show.title }}
+{% endblock %}
+
+{% block content %}
+<div class="container my-2">
+    <h1 class="text-center">{{ show.title }} ({{ show.release_year }})</h1>
+    <h3 class="text-center">{{ show.type.value }} info</h3>
+    <div class="row">
+        <div class="col-8">
+            <div class="row">
+                <div class="col-6">
+                    <p>Release year</p>
+                </div>
+                <div class="col-6">
+                    <p><a href="{{ url_for('shows.get_shows', release_year=show.release_year) }}">{{ show.release_year }}</a></p>
+                </div>
+            </div>
+
+            {% if show.country %}
+            <div class="row">
+                <div class="col-6">
+                    Country
+                </div>
+                <div class="col-6">
+                    {% for country in show.country %}
+                    <a href="{{ url_for('shows.get_shows', countries=country.name) }}">{{ country.name }}</a>{% if not
+                    loop.last %}{{ ', ' }}{% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-6">
+                    <p> Duration </p>
+                </div>
+
+                <div class="col-6">
+                    <p>
+                        {{ show.duration }}
+                        {% if show.type.value == "Movie" %}
+                        minutes
+                        {% else %}
+                        season(s)
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            {% if show.listed_in %}
+            <div class="row">
+                <div class="col-6">
+                    <p>Genres:</p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        {% for genre in show.listed_in %}
+                        <a href="{{ url_for('shows.get_shows', genres=genre.name) }}">{{ genre.name }}</a>{% if not
+                        loop.last %}{{ ', ' }}{% endif %}
+                        {% endfor %}</p>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+        <div class="col-4">
+            {% if show.director %}
+            <h4>Directors</h4>
+            {% for director in show.director %}
+            <p><a href="{{ url_for('persons.get_person', person_id=director.id) }}">{{ director.fullname }}</a></p>
+            {% endfor %}
+            {% endif %}
+
+            {% if show.cast %}
+            <h4>Cast</h4>
+            {% for actor in show.cast %}
+            <p class="my-0"><a href="{{ url_for('persons.get_person', person_id=actor.id) }}">{{ actor.fullname }}</a>
+            </p>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-5"><p><i>{{ show.description }}</i></p></div>
+</div>
+{% endblock %}
