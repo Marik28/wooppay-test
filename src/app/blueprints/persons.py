@@ -2,6 +2,7 @@ from flask import (
     Blueprint,
     render_template, request,
 )
+from flask_login import login_required
 from werkzeug.datastructures import MultiDict
 
 from ..database import Session
@@ -13,6 +14,7 @@ blueprint = Blueprint('persons', __name__, template_folder='templates')
 
 # TODO: add reset filters button
 @blueprint.get("/")
+@login_required
 def get_persons():
     query = MultiDict(request.args)
     query.pop("page", None)
@@ -35,6 +37,7 @@ def get_persons():
 
 
 @blueprint.get("/<int:person_id>")
+@login_required
 def get_person(person_id: int):
     with Session() as session:
         service = PersonsService(session)
