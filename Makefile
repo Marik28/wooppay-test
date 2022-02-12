@@ -22,3 +22,9 @@ app-dev:
 
 admin-dev:
 	cd src; python -m admin
+
+test:
+	export PYTHONPATH=src/; pytest -vs
+
+createsuperuser:
+	cd src; python -m scripts.createsuperuser
