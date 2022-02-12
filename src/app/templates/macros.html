@@ -72,3 +72,12 @@
             </div>
         </div>
 {% endmacro %}
+
+
+{% macro render_person_shows(shows) %}
+    {% for show in shows %}
+    <p>
+        <a href="{{ url_for('shows.get_show', show_id=show.show_id) }}">{{ show.title }}</a>
+    </p>
+    {% endfor %}
+{% endmacro %}
