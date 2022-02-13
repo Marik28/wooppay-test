@@ -1,6 +1,8 @@
 from flask import (
     Flask,
     render_template,
+    redirect,
+    url_for,
 )
 from flask_admin import Admin
 from flask_bcrypt import Bcrypt
@@ -58,6 +60,10 @@ def create_app() -> Flask:
 
     from .blueprints import auth
     app.register_blueprint(auth.blueprint)
+
+    @app.get("/")
+    def index():
+        return redirect(url_for("shows.get_shows"))
 
     login_manager = LoginManager(app)
 

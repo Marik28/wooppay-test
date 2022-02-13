@@ -1,6 +1,6 @@
-from flask_admin.contrib.sqla import ModelView
+from .protected import ProtectedView
 
 
-class GenresView(ModelView):
+class GenresView(ProtectedView):
     can_view_details = True
     column_default_sort = "name"

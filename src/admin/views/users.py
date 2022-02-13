@@ -1,7 +1,7 @@
-from flask_admin.contrib.sqla import ModelView
+from .protected import ProtectedView
 
 
-class UsersView(ModelView):
+class UsersView(ProtectedView):
     can_create = False
     can_view_details = True
     can_edit = False

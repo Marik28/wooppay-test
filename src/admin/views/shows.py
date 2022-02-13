@@ -1,6 +1,6 @@
-from flask_admin.contrib.sqla import ModelView
 from flask_admin.model.template import macro
 
+from .protected import ProtectedView
 from ..formatters.shows import (
     format_date,
     format_duration,
@@ -10,7 +10,7 @@ from ..formatters.shows import (
 )
 
 
-class ShowsView(ModelView):
+class ShowsView(ProtectedView):
     # Access
     can_create = True
     can_view_details = True

@@ -1,8 +1,9 @@
-from flask_admin.contrib.sqla import ModelView
 from flask_admin.model.template import macro
 
+from .protected import ProtectedView
 
-class PersonsView(ModelView):
+
+class PersonsView(ProtectedView):
     # Access
     can_view_details = True
 
