@@ -19,8 +19,8 @@ class ShowsView(ModelView):
     can_export = True
 
     # Templates
-    details_template = "shows/details.html"
-    list_template = "shows/list.html"
+    details_template = "admin/shows/details.html"
+    list_template = "admin/shows/list.html"
 
     # Columns
     form_columns = ["show_id", "title", "description", "type", "listed_in", "country", "duration", "date_added",
