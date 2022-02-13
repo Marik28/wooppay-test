@@ -40,6 +40,10 @@ activate virtual environment
     python3.9 -m venv venv
     source venv/bin/activate
 
+install dependencies
+    
+    make install
+
 copy .env file (if you want to change some variables, 
 make sure to apply changes to both .env files 
 in the project root directory and in the `src/` directory)
