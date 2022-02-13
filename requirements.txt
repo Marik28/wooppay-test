@@ -13,6 +13,7 @@ flask_login
 Flask-Bcrypt
 flask-admin
 Flask-WTF
+Flask-SQLAlchemy
 WTForms
 typer
 pytest
