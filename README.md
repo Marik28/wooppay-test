@@ -44,7 +44,7 @@ copy .env file (if you want to change some variables,
 make sure to apply changes to both .env files 
 in the project root directory and in the `src/` directory)
     
-    cp .env-exapmle .env && cp .env-example src/.env
+    cp .env-example .env && cp .env-example src/.env
 
 start docker container
     
