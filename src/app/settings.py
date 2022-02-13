@@ -20,9 +20,6 @@ class Settings(BaseSettings):
     app_port: int
     secret_key: str
 
-    admin_app_host: str
-    admin_app_port: int
-
     username_min_len: int
     username_max_len: int
 
