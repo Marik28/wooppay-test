@@ -78,6 +78,6 @@ def create_app() -> Flask:
 
     @app.errorhandler(Unauthorized)
     def handle_unauthorized(error: GenericException):
-        return render_template("errors/401.html", error=error)
+        return render_template("errors/401.html", error=error), 401
 
     return app
