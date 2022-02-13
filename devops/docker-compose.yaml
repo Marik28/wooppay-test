@@ -12,3 +12,21 @@ services:
       POSTGRES_PORT: $POSTGRES_PORT
     ports:
       - $POSTGRES_PORT:5432
+
+  app:
+    build:
+      dockerfile: devops/Dockerfile
+      context: ../.
+    depends_on:
+      - db
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_PORT: 5432
+      FLASK_SECRET_KEY: $FLASK_SECRET_KEY
+      APP_PORT: $APP_PORT
+    entrypoint: gunicorn --bind 0.0.0.0:6000 app.wsgi:app
+    ports:
+      - $APP_PORT:6000
