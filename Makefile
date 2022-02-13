@@ -20,6 +20,10 @@ db:
 app-dev:
 	cd src; python -m app
 
+app-docker:
+	docker compose --env-file .env -p wooppay-test -f devops/docker-compose.yaml up app --build --detach
+
+
 admin-dev:
 	cd src; python -m admin
 
