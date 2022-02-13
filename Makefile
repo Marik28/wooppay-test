@@ -32,3 +32,6 @@ test:
 
 createsuperuser:
 	cd src; python -m scripts.createsuperuser
+
+insert-data:
+	cd src; python -m scripts.insert_data ../data/netflix.csv
