@@ -14,6 +14,9 @@ migrate:
 downgrade:
 	cd src; alembic downgrade -1
 
+up:
+	docker compose --env-file .env -p wooppay-test -f devops/docker-compose.yaml up --build --detach
+
 db:
 	docker compose --env-file .env -p wooppay-test -f devops/docker-compose.yaml up db --build --detach
 
@@ -22,10 +25,6 @@ app-dev:
 
 app-docker:
 	docker compose --env-file .env -p wooppay-test -f devops/docker-compose.yaml up app --build --detach
-
-
-admin-dev:
-	cd src; python -m admin
 
 test:
 	export PYTHONPATH=src/; pytest -vs
