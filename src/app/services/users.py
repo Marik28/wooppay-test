@@ -1,7 +1,6 @@
 from typing import Optional
 
 import sqlalchemy.exc
-from loguru import logger
 from werkzeug.exceptions import (
     Conflict,
     NotFound,
@@ -31,9 +30,7 @@ class UsersService(GenericCRUDService):
         user = self.get_default_query().filter(tables.User.username == username).first()
         if user is None:
             raise NotFound
-        logger.debug(f"{user=}")
         return user
 
     def get_or_none(self, lookup: int) -> Optional[tables.User]:
-        logger.debug(F"{lookup=}")
         return self.get_detail_query().filter(tables.User.id == lookup).first()

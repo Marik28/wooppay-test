@@ -9,7 +9,6 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
-from loguru import logger
 
 from . import tables
 from .database import Session
@@ -69,11 +68,9 @@ def create_app() -> Flask:
 
     @login_manager.user_loader
     def load_user(user_id):
-        logger.debug(f"{user_id=}")
         from .services.users import UsersService
         with Session() as session:
             user = UsersService(session).get_or_none(int(user_id))
-            logger.debug(user.username)
             return user
 
     from werkzeug.exceptions import Unauthorized

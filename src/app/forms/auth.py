@@ -63,22 +63,14 @@ class LoginForm(FlaskForm):
 
     @staticmethod
     def validate_username(form, field):
-        from loguru import logger
-        logger.debug(f"{field.data=}")
         with Session() as session:
             error = ValidationError("Invalid username or password")
             try:
                 user = UsersService(session).get_by_username(field.data)
-                logger.debug(f"{user.password_hash=}")
             except NotFound:
                 raise error
 
             if not bcrypt.check_password_hash(user.password_hash, form.password.data):
                 raise error
             # TODO: think of better solution
-            logger.debug(f"{user=}")
             login_user(user, remember=True)
-
-            from flask_login import current_user
-            logger.debug("---LOGGED---")
-            logger.debug(f"{current_user=}")
