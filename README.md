@@ -1,5 +1,12 @@
 # WOOPPAY TEST
-Requirements:
+
+## Info
+
+This service provides retrieving, filtering and paginated displaying TV-shows and movies data.
+It also has admin panel which allows you to create, delete, edit shows data
+and also to download it in `csv` format.
+
+## Requirements:
 - `python3.9` or higher
 - `make` utility
 - `docker-compose`
@@ -32,7 +39,9 @@ activate virtual environment
     python3.9 -m venv venv
     source venv/bin/activate
 
-copy .env file
+copy .env file (if you want to change some variables, 
+make sure to apply changes to both .env files 
+in the project root directory and in the `src/` directory)
     
     cp .env-exapmle .env && cp .env-example src/.env
 
